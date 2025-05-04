@@ -16,7 +16,8 @@
         "slim/csrf": "^1.5",
         "odan/session": "^6.3",
         "league/uri": "^7.5",
-        "ext-openssl" : "*"
+        "ext-openssl" : "*",
+        "symfony/console": "^7.2"
     },
     "autoload" : {
         "psr-4" : {

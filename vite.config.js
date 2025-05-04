@@ -10,6 +10,7 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 dotenv.config()
 
+
 function valetMacConfigPath() {
     return path.resolve(homedir.homedir(), '.config', 'valet')
 }

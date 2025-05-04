@@ -5,6 +5,7 @@ $builder = new DI\ContainerBuilder();
 $builder->addDefinitions(ROOT_PATH . '/config/app.php');
 $builder->addDefinitions(ROOT_PATH . '/config/assets.php');
 $builder->addDefinitions(ROOT_PATH . '/config/services.php');
+$builder->addDefinitions(ROOT_PATH . '/config/commands.php');
 $builder->addDefinitions(ROOT_PATH . '/config/twig.php');
 
 

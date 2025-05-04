@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+// application.php
+
+define('ROOT_PATH', __DIR__);
+
+define('PUBLIC_PATH', __DIR__ . '/public');
+
+require __DIR__.'/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(ROOT_PATH);
+$dotenv->load();
+
+$application = require_once ROOT_PATH . '/bootstrap/console.php';
+
+$application->run();
