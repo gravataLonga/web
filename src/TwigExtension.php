@@ -16,7 +16,7 @@ final class TwigExtension extends AbstractExtension implements GlobalsInterface
 
     private string $viteUrl;
 
-    private Manifest $manifest;
+    private ?Manifest $manifest;
 
     private mixed $csrf;
 
@@ -29,7 +29,12 @@ final class TwigExtension extends AbstractExtension implements GlobalsInterface
         $this->isProduction = $this->container->get('app.env') === 'production';
         $this->viteUrl = $this->container->get('vite.url');
         self::$viteIsRunning = $this->viteIsRunning();
-        $this->manifest = new Manifest($this->container->get('vite.manifest'), $this->container->get('app.url'));
+        try {
+            $this->manifest = $this->container->get(Manifest::class);
+        } catch (\Exception $e) {
+            $this->manifest = null;
+        }
+
         $this->csrf = $this->container->get('csrf');
     }
 
@@ -52,6 +57,10 @@ final class TwigExtension extends AbstractExtension implements GlobalsInterface
     {
         if (self::$viteIsRunning) {
             return $this->getHtmlForEntrypoint($this->viteUrl . '/' . $entry);
+        }
+
+        if (is_null($this->manifest)) {
+            return $this->getHtmlForEntrypoint($entry, null);
         }
 
         $entrypoint = $this->manifest->getEntrypoint($entry);

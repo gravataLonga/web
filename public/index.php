@@ -2,4 +2,4 @@
 
 define('START_TIME', microtime(true));
 
-(require __DIR__ . '/../bootstrap.php')->run();
+(require __DIR__ . '/../bootstrap/bootstrap.php')->run();

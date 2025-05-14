@@ -30,14 +30,23 @@ return [
 
     TwigExtension::class => DI\create()->constructor(DI\get(ContainerInterface::class)),
 
-    // Session
     'session.config' => [
-        'name' => DI\get('app.name'),
+
+        'name' => 'lumice',
+
         'lifetime' => 7200,
+
         'save_path' => null,
-        'domain' => null,
-        'secure' => false,
+
+        'domain' => DI\factory(function (string $appUrl) {
+            $parsedUrl = parse_url($appUrl);
+            return $parsedUrl['host'];
+        })->parameter('appUrl', DI\get('app.url')),
+
+        'secure' => DI\get('app.is_production'),
+
         'httponly' => true,
+
         'cache_limiter' => 'nocache',
     ],
 
@@ -51,7 +60,6 @@ return [
 
     'session' => DI\get(SessionManagerInterface::class),
 
-    // CSRF Adding to Container
     Guard::class => DI\create()
         ->constructor(DI\get(ResponseFactory::class)),
 

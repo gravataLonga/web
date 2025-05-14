@@ -2,9 +2,9 @@
 
 use Dotenv\Dotenv;
 
-define('ROOT_PATH', __DIR__);
+define('ROOT_PATH', dirname(__DIR__ . '../'));
 
-define('PUBLIC_PATH', __DIR__ . '/public');
+define('PUBLIC_PATH', dirname(ROOT_PATH . '/public'));
 
 require ROOT_PATH . '/vendor/autoload.php';
 

@@ -21,6 +21,10 @@ class Manifest
 
     public function __construct(string $manifestFile, string $baseUri, string $algorithm = "sha256")
     {
+        if (! realpath($manifestFile)) {
+            throw new \Exception("Manifest file does not exist: $manifestFile");
+        }
+
         if (! file_exists(realpath($manifestFile))) {
             throw new \Exception("Manifest file does not exist: $manifestFile");
         }
