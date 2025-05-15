@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use Gravatalonga\Developer;
+
 return [
 
     'app.name' => \DI\env('APP_NAME', 'Lumice'),
@@ -17,5 +19,9 @@ return [
     'path.public' => PUBLIC_PATH,
 
     'path.root' => ROOT_PATH,
+
+    'tinker.alias' => [
+        'Developer' => Developer::class,
+    ]
 
 ];

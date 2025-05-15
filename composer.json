@@ -17,7 +17,8 @@
         "odan/session": "^6.3",
         "league/uri": "^7.5",
         "ext-openssl" : "*",
-        "symfony/console": "^7.2"
+        "symfony/console": "^7.2",
+        "psy/psysh": "^0.12.8"
     },
     "autoload" : {
         "psr-4" : {
@@ -25,7 +26,7 @@
             "Gravatalonga\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/helper.php"
         ]
     },
     "autoload-dev": {

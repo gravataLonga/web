@@ -11,11 +11,11 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'inspire',
     description: 'Display an inspiring quote'
 )]
-final class Inspire extends Command
+final class InspireCommand extends Command
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Inspire yourself!');
+        $output->writeln('InspireCommand yourself!');
         return Command::SUCCESS;
     }
 }

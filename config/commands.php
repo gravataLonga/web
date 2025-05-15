@@ -1,11 +1,17 @@
 <?php
 
-use App\Command\Inspire;
+use App\Command\InspireCommand;
+use App\Command\TinkerCommand;
 
 return [
 
     'commands' => [
-        Inspire::class
-    ]
+        'inspire' => InspireCommand::class,
+        'tinker' => TinkerCommand::class,
+    ],
+
+    TinkerCommand::class => DI\factory(function (array $tinker) {
+        return new TinkerCommand($tinker);
+    })->parameter('tinker', DI\get('tinker.alias')),
 
 ];
