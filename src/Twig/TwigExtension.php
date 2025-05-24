@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Gravatalonga;
+namespace Gravatalonga\Twig;
 
-use Gravatalonga\Twig\Config;
+use Gravatalonga\Manifest;
 use Psr\Container\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;

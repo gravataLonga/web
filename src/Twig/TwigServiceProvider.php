@@ -2,17 +2,23 @@
 
 namespace Gravatalonga\Twig;
 
-use Gravatalonga\ServiceProvider\ServiceProviderInterface;
-use Gravatalonga\TwigExtension;
+use Gravatalonga\Manifest;
+use Gravatalonga\ServiceProvider\DefinitionServiceProvider;
+use Psr\Container\ContainerInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-final class TwigServiceProvider implements ServiceProviderInterface
+final class TwigServiceProvider extends DefinitionServiceProvider
 {
-
     public function register(): array
     {
         return [
+
+            Manifest::class => \DI\create()->constructor(
+                \DI\get('vite.manifest'),
+                \DI\get('app.url')
+            ),
+
             'twig.template' => [
                 \DI\string('{path.root}/resources/views')
             ],
@@ -32,6 +38,8 @@ final class TwigServiceProvider implements ServiceProviderInterface
 
             FilesystemLoader::class => \DI\create()
                 ->constructor(\DI\get('twig.template')),
+
+            TwigExtension::class => \DI\create()->constructor(\DI\get(ContainerInterface::class)),
 
             Environment::class => \DI\factory(function (
                 TwigExtension $extension

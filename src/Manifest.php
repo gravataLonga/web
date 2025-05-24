@@ -19,7 +19,11 @@ class Manifest
 
     private string $baseUri;
 
-    public function __construct(string $manifestFile, string $baseUri, string $algorithm = "sha256")
+    public function __construct(
+        string $manifestFile,
+        string $baseUri,
+        string $algorithm = "sha256"
+    )
     {
         if (! realpath($manifestFile)) {
             throw new \Exception("Manifest file does not exist: $manifestFile");
@@ -181,7 +185,15 @@ class Manifest
         return "{$this->algorithm}-" . base64_encode(
                 openssl_digest(
                     file_get_contents(
-                        $this->getPath($file)
+                        $this->getPath($file),
+                        false,
+                        // @todo: OpenSSL Error messages: error:0A000086
+                        stream_context_create([
+                            'ssl' => [
+                                'verify_peer' => false,
+                                'verify_peer_name' => false,
+                            ]
+                        ])
                     ),
                     $this->algorithm,
                     true

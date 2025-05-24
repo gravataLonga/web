@@ -1,17 +1,21 @@
 <?php declare(strict_types=1);
 
 use Gravatalonga\Command\CommandServiceProvider;
-use Gravatalonga\ServiceProvider\Definition;
+use Gravatalonga\Logger\LoggerServiceProvider;
+use Gravatalonga\Security\SecurityServiceProvider;
+use Gravatalonga\Session\SessionServiceProvider;
 use Gravatalonga\Twig\TwigServiceProvider;
 
 $builder = new DI\ContainerBuilder();
 
 $builder->addDefinitions(ROOT_PATH . '/config/app.php');
 $builder->addDefinitions(ROOT_PATH . '/config/assets.php');
-$builder->addDefinitions(ROOT_PATH . '/config/services.php');
-$builder->addDefinitions(new Definition(new CommandServiceProvider()));
-$builder->addDefinitions(new Definition(new TwigServiceProvider()));
 
+$builder->addDefinitions(new LoggerServiceProvider());
+$builder->addDefinitions(new SecurityServiceProvider());
+$builder->addDefinitions(new SessionServiceProvider());
+$builder->addDefinitions(new CommandServiceProvider());
+$builder->addDefinitions(new TwigServiceProvider());
 
 if ($_ENV['APP_ENV'] === 'production') {
     $builder->enableCompilation(ROOT_PATH . '/storage/framework/cache');

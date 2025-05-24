@@ -8,3 +8,4 @@ public/assets/manifest.json
 composer.lock
 package-lock.json
 vendor
+node_modules

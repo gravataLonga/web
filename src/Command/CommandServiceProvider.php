@@ -4,9 +4,10 @@ namespace Gravatalonga\Command;
 
 use App\Command\InspireCommand;
 use App\Command\TinkerCommand;
+use Gravatalonga\ServiceProvider\DefinitionServiceProvider;
 use Gravatalonga\ServiceProvider\ServiceProviderInterface;
 
-final class CommandServiceProvider implements ServiceProviderInterface
+final class CommandServiceProvider extends DefinitionServiceProvider
 {
     public function register(): array
     {
