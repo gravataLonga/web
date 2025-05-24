@@ -66,7 +66,7 @@ final class TwigExtension extends AbstractExtension implements GlobalsInterface
         $entrypoint = $this->manifest->getEntrypoint($entry);
 
         if (! $entrypoint) {
-            return '';
+            return $this->getHtmlForEntrypoint($entry, null);
         }
 
         $url = $entrypoint['url'];

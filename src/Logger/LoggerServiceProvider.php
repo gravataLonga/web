@@ -20,6 +20,8 @@ final class LoggerServiceProvider extends DefinitionServiceProvider
             })
                 ->parameter('appName', \DI\get('app.name'))
                 ->parameter('logPath', \DI\string('{path.root}/storage/logs/app.log')),
+
+            'logger' => \DI\get(LoggerInterface::class),
         ];
     }
 }

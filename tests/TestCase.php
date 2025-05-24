@@ -20,7 +20,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         /** @var \Slim\App $app */
-        self::$app = require __DIR__ . '/../bootstrap.php';
+        self::$app = require __DIR__ . '/../bootstrap/bootstrap.php';
         return self::$app;
     }
 

@@ -22,7 +22,7 @@ final class SessionServiceProvider extends DefinitionServiceProvider
 
                 'domain' => \DI\factory(function (string $appUrl) {
                     $parsedUrl = parse_url($appUrl);
-                    return $parsedUrl['host'];
+                    return $parsedUrl['host'] ?? null;
                 })->parameter('appUrl', \DI\get('app.url')),
 
                 'secure' => \DI\get('app.is_production'),

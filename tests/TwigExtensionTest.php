@@ -24,4 +24,18 @@ final class TwigExtensionTest extends TestCase
         $this->assertStringContainsString($guard->getTokenNameKey(), $html);
         $this->assertStringContainsString($guard->getTokenValueKey(), $html);
     }
+
+    #[Test]
+    public function can_call_assets()
+    {
+        $container = $this->getContainer();
+        $twig = $container->get('twig');
+
+        $html = $twig->createTemplate('{{ asset("css/app.css") }}')->render();
+
+        $this->assertNotEmpty($html);
+        $this->assertStringContainsString("<link", $html);
+        $this->assertStringContainsString("css/app.css", $html);
+
+    }
 }

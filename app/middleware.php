@@ -27,7 +27,5 @@ return function (App $app) {
     $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
     $app->add(LogHttpRequestMiddleware::class);
-
     $app->add(SessionStartMiddleware::class);
-
 };

@@ -2,6 +2,7 @@
 
 namespace Gravatalonga\Security;
 
+use ArrayAccess;
 use Gravatalonga\ServiceProvider\DefinitionServiceProvider;
 
 use Slim\Csrf\Guard;
@@ -11,10 +12,16 @@ final class SecurityServiceProvider extends DefinitionServiceProvider
     public function register(): array
     {
         return [
-            Guard::class => \DI\create()
-                ->constructor(
-                    \DI\get(ResponseFactory::class)
-                ),
+
+            'csrf.prefix' => 'csrf',
+
+            'csrf.storage' => null,
+
+            Guard::class => \DI\factory(function (ResponseFactory $responseFactory, string $prefix, ?array $storage) {
+                return new Guard($responseFactory, $prefix, $storage);
+            })
+                ->parameter('prefix', \DI\get('csrf.prefix'))
+                ->parameter('storage', \DI\get('csrf.storage')),
 
             'csrf' => \DI\get(Guard::class),
         ];
